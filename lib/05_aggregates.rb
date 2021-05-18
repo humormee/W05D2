@@ -103,5 +103,49 @@ end
 def populous_continents
   # List the continents that have a total population of at least 100 million.
   execute(<<-SQL)
+  SELECT
+    continent
+  FROM
+    (
+    SELECT
+      continent, SUM(population) AS totalPop
+    FROM
+      countries
+
+    GROUP BY
+      continent
+    ) AS aliasCountries
+  WHERE
+    aliasCountries.totalPop >= 100000000;
+
+
+
   SQL
 end
+
+  # SELECT
+  #   aliasCountries.continent
+  # FROM
+  #   (
+  #   SELECT
+  #     continent, SUM(population) AS totalPop
+  #   FROM
+  #     countries
+
+  #   GROUP BY
+  #     continent
+  #   ) AS aliasCountries
+  # WHERE
+  #   aliasCountries.totalPop >= 100000000;
+
+
+
+# == Schema Information
+#
+# Table name: countries
+#
+#  name        :string       not null, primary key
+#  continent   :string
+#  area        :integer
+#  population  :integer
+#  gdp         :integer

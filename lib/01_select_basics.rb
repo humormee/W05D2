@@ -41,7 +41,7 @@ def per_capita_gdp
     FROM
       countries
     WHERE
-      area > 5000000
+      area > 5000000;
   SQL
 end
 
